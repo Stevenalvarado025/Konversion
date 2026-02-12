@@ -71,36 +71,100 @@ fi
 success "Konversion installed successfully!"
 echo ""
 
-# Check dependencies
-MISSING=""
+# Check and install dependencies
+MISSING_YTDLP=false
+MISSING_FFMPEG=false
 
 if ! command -v yt-dlp &> /dev/null; then
-    MISSING="${MISSING}yt-dlp "
+    MISSING_YTDLP=true
 fi
 
 if ! command -v ffmpeg &> /dev/null; then
-    MISSING="${MISSING}ffmpeg "
+    MISSING_FFMPEG=true
 fi
 
-if [ -n "$MISSING" ]; then
-    warn "Missing dependencies: ${MISSING}"
+if [ "$MISSING_YTDLP" = true ] || [ "$MISSING_FFMPEG" = true ]; then
+    info "Installing missing dependencies..."
     echo ""
-    echo -e "${BOLD}Install them:${NC}"
 
     if [ "$OS" = "darwin" ]; then
-        echo "  brew install ${MISSING}"
+        # macOS — use Homebrew
+        if command -v brew &> /dev/null; then
+            BREW_PKGS=""
+            [ "$MISSING_YTDLP" = true ] && BREW_PKGS="${BREW_PKGS} yt-dlp"
+            [ "$MISSING_FFMPEG" = true ] && BREW_PKGS="${BREW_PKGS} ffmpeg"
+            echo -e "  Running: brew install${BREW_PKGS}"
+            brew install $BREW_PKGS
+        else
+            warn "Homebrew not found. Install these manually:"
+            [ "$MISSING_YTDLP" = true ] && echo "  brew install yt-dlp"
+            [ "$MISSING_FFMPEG" = true ] && echo "  brew install ffmpeg"
+            echo ""
+            echo "  Install Homebrew first:"
+            echo '  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+        fi
     else
-        echo "  sudo apt install ${MISSING}    (Debian/Ubuntu)"
-        echo ""
-        echo "  If yt-dlp isn't available via apt:"
-        echo "  pip install yt-dlp"
+        # Linux — use apt + pip/pipx
+        if [ "$MISSING_FFMPEG" = true ]; then
+            echo -e "  Installing ffmpeg..."
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+        fi
+
+        if [ "$MISSING_YTDLP" = true ]; then
+            echo -e "  Installing yt-dlp..."
+            if command -v pipx &> /dev/null; then
+                pipx install yt-dlp
+            elif command -v pip3 &> /dev/null; then
+                pip3 install --user yt-dlp 2>/dev/null || pip3 install --user --break-system-packages yt-dlp 2>/dev/null || {
+                    # If pip fails, try installing pipx
+                    sudo apt-get install -y -qq pipx 2>/dev/null && pipx install yt-dlp || {
+                        warn "Could not auto-install yt-dlp. Install it manually:"
+                        echo "  sudo apt install pipx && pipx install yt-dlp"
+                    }
+                }
+            else
+                # No pip3, install it
+                sudo apt-get install -y -qq python3-pip 2>/dev/null
+                if command -v pip3 &> /dev/null; then
+                    pip3 install --user yt-dlp 2>/dev/null || pip3 install --user --break-system-packages yt-dlp
+                else
+                    warn "Could not auto-install yt-dlp. Install it manually:"
+                    echo "  sudo apt install pipx && pipx install yt-dlp"
+                fi
+            fi
+
+            # Check if yt-dlp ended up in ~/.local/bin and warn if not in PATH
+            if ! command -v yt-dlp &> /dev/null; then
+                if [ -f "$HOME/.local/bin/yt-dlp" ]; then
+                    warn "yt-dlp was installed to ~/.local/bin which is not in your PATH."
+                    echo ""
+                    echo -e "  ${BOLD}Run this, then restart your terminal:${NC}"
+                    echo '  echo '\''export PATH="$HOME/.local/bin:$PATH"'\'' >> ~/.bashrc'
+                    echo ""
+                fi
+            fi
+        fi
     fi
-    echo ""
-else
-    success "All dependencies found (yt-dlp, ffmpeg)"
     echo ""
 fi
 
+# Final check
+ALL_GOOD=true
+if ! command -v yt-dlp &> /dev/null && [ ! -f "$HOME/.local/bin/yt-dlp" ]; then
+    warn "yt-dlp is still missing"
+    ALL_GOOD=false
+fi
+if ! command -v ffmpeg &> /dev/null; then
+    warn "ffmpeg is still missing"
+    ALL_GOOD=false
+fi
+
+if [ "$ALL_GOOD" = true ]; then
+    success "All dependencies found!"
+fi
+
+echo ""
 echo -e "${BOLD}Run it:${NC}"
 echo "  konversion"
 echo ""

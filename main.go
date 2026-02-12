@@ -25,6 +25,9 @@ func main() {
 	home, _ := os.UserHomeDir()
 	downloadDir := filepath.Join(home, "Downloads")
 
+	// Create Downloads folder if it doesn't exist
+	os.MkdirAll(downloadDir, 0755)
+
 	opts := Options{
 		Quality:   320,
 		OutputDir: downloadDir,
