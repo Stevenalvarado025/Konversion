@@ -47,21 +47,24 @@ brew install go yt-dlp ffmpeg
 
 This might take a minute. Wait for it to finish.
 
-### Step 3: Download and build Konversion
+### Step 3: Download, build, and install Konversion
 
 ```bash
 git clone https://github.com/Stevenalvarado025/Konversion.git ~/Konversion
 cd ~/Konversion
 go build -o konversion .
+sudo cp konversion /usr/local/bin/konversion
 ```
 
-### Step 4: Make it available everywhere (optional)
+It will ask for your Mac password — type it in and press Enter (you won't see the characters as you type, that's normal).
+
+### Step 4: Run it
 
 ```bash
-sudo cp ~/Konversion/konversion /usr/local/bin/konversion
+konversion
 ```
 
-It'll ask for your password. After that you can type `konversion` from anywhere.
+You should see the Konversion banner. You're good to go.
 
 ---
 
