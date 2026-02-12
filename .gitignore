@@ -1,0 +1,15 @@
+# Binary
+konversion
+konversion.exe
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Downloads created during testing
+downloads/
+*.mp3
