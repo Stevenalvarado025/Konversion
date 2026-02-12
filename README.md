@@ -205,6 +205,19 @@ Konversion is a Go wrapper around two industry-standard open source tools:
 
 Konversion handles the terminal UI, progress bar, metadata display, and makes the whole process as simple as paste-and-go. No Python scripts, no browser extensions, no sketchy websites with popups.
 
+## Disclaimer
+
+Konversion is provided for **personal and educational use only**. This tool is intended for downloading content that you have the right to download, such as:
+
+- Videos you own or have created
+- Content licensed under Creative Commons or similar open licenses
+- Content where the creator has explicitly allowed downloading
+- Fair use purposes (commentary, education, research)
+
+**You are solely responsible for how you use this tool.** Downloading copyrighted material without permission may violate YouTube's Terms of Service and copyright laws in your country. The author(s) of Konversion are not responsible for any misuse of this software or any violations of third-party rights, terms of service, or applicable laws.
+
+By using Konversion, you agree that you will comply with all applicable laws and respect the rights of content creators.
+
 ## License
 
 MIT — do whatever you want with it.
