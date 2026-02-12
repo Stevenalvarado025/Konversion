@@ -25,19 +25,19 @@ Built for producers and artists who just want to rip audio from YouTube without 
 - MP3s are saved to your Downloads folder
 - Shows you the exact file path and size when it's done
 
-## Quick Install (macOS)
+---
 
-You need 3 things: **Homebrew**, **Go**, and two free tools (**yt-dlp** + **ffmpeg**). Here's how to get everything set up from scratch.
+## Install (macOS)
+
+Open **Terminal** (search "Terminal" in Spotlight) and follow these steps. **Run each command one at a time** — wait for each one to finish before pasting the next.
 
 ### Step 1: Install Homebrew (if you don't have it)
-
-Open **Terminal** (search "Terminal" in Spotlight) and paste this:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Follow the instructions on screen. When it's done, close Terminal and reopen it.
+Follow the instructions on screen. When it's done, **close Terminal and reopen it**.
 
 ### Step 2: Install Go, yt-dlp, and ffmpeg
 
@@ -45,74 +45,126 @@ Follow the instructions on screen. When it's done, close Terminal and reopen it.
 brew install go yt-dlp ffmpeg
 ```
 
-This might take a minute. Wait for it to finish.
+Wait for it to finish. This might take a few minutes.
 
-### Step 3: Download, build, and install Konversion
+### Step 3: Download Konversion
 
 ```bash
 git clone https://github.com/Stvn444/Konversion.git ~/Konversion
+```
+
+> **Already have a ~/Konversion folder?** Delete it first: `rm -rf ~/Konversion` then run the clone command again.
+
+### Step 4: Build it
+
+```bash
 cd ~/Konversion
+```
+
+```bash
 go build -o konversion .
+```
+
+### Step 5: Install it
+
+```bash
 sudo cp konversion /usr/local/bin/konversion
 ```
 
-It will ask for your Mac password — type it in and press Enter (you won't see the characters as you type, that's normal).
+It will ask for your Mac password. Type it in and press Enter. You won't see the characters as you type — that's normal.
 
-### Step 4: Run it
+### Step 6: Run it
+
+Open a **new Terminal window** and type:
 
 ```bash
 konversion
 ```
 
-You should see the Konversion banner. You're good to go.
+> **IMPORTANT:** The command is all lowercase: `konversion` (not `Konversion`)
+
+You should see the Konversion banner and a prompt to paste a URL. You're good to go!
 
 ---
 
-## Quick Install (Linux)
+## Install (Linux)
 
-### Ubuntu / Debian
+Run each command one at a time:
 
 ```bash
 sudo apt update
+```
+
+```bash
 sudo apt install golang ffmpeg
+```
+
+```bash
 pip install yt-dlp
 ```
 
-### Then build Konversion
-
 ```bash
 git clone https://github.com/Stvn444/Konversion.git ~/Konversion
+```
+
+```bash
 cd ~/Konversion
+```
+
+```bash
 go build -o konversion .
-sudo cp ~/Konversion/konversion /usr/local/bin/konversion
+```
+
+```bash
+sudo cp konversion /usr/local/bin/konversion
+```
+
+Then run:
+
+```bash
+konversion
 ```
 
 ---
 
-## Quick Install (Windows)
+## Install (Windows)
 
 1. Install [Go](https://go.dev/dl/) — download the Windows installer and run it
-2. Install [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) — download "ffmpeg-release-essentials.zip", extract it, and add the `bin` folder to your PATH
-3. Install [yt-dlp](https://github.com/yt-dlp/yt-dlp/releases) — download `yt-dlp.exe` and put it in a folder that's in your PATH
-4. Open Command Prompt or PowerShell:
+2. Install [Git](https://git-scm.com/downloads/win) — download and run the installer
+3. Install [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) — download "ffmpeg-release-essentials.zip", extract it, and add the `bin` folder to your PATH
+4. Install [yt-dlp](https://github.com/yt-dlp/yt-dlp/releases) — download `yt-dlp.exe` and put it in a folder that's in your PATH
+
+Then open Command Prompt or PowerShell and run each command one at a time:
 
 ```bash
 git clone https://github.com/Stvn444/Konversion.git %USERPROFILE%\Konversion
+```
+
+```bash
 cd %USERPROFILE%\Konversion
+```
+
+```bash
 go build -o konversion.exe .
+```
+
+Then to run it:
+
+```bash
+%USERPROFILE%\Konversion\konversion.exe
 ```
 
 ---
 
 ## How to Use
 
-Just run it:
+Just type `konversion` in Terminal (all lowercase):
 
 ```bash
 konversion
 ```
 
-You'll see the Konversion banner and a prompt. That's where you paste your YouTube URL:
+You'll see the Konversion banner and a prompt. Paste your YouTube URL and press Enter:
 
 ```
 Enter YouTube URL (or 'quit' to exit): https://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -121,14 +173,14 @@ Enter YouTube URL (or 'quit' to exit): https://www.youtube.com/watch?v=dQw4w9WgX
   Channel:  Rick Astley
   Duration: 3:33
 
-  ℹ Downloading and converting to MP3 (320 kbps)...
+  Downloading and converting to MP3 (320 kbps)...
   ██████████████████████████████ 100.0%
 Saved: /Users/you/Downloads/Rick Astley - Never Gonna Give You Up.mp3 (8.2 MB)
 
 Enter YouTube URL (or 'quit' to exit):
 ```
 
-It loops — so you can keep pasting URLs back to back. Type `quit` when you're done.
+It loops — keep pasting URLs back to back. Type `quit` when you're done.
 
 ### Download a Playlist
 
@@ -137,7 +189,7 @@ Paste a playlist URL and it grabs every track:
 ```
 Enter YouTube URL (or 'quit' to exit): https://www.youtube.com/playlist?list=PLxxxxxxx
 
-  ℹ Found 12 tracks in playlist
+  Found 12 tracks in playlist
 
   [1/12] Song One
   [2/12] Song Two
@@ -153,19 +205,57 @@ Your **Downloads** folder. After every download it prints the full path so you k
 
 ## Troubleshooting
 
+### "command not found: konversion"
+
+This means the install didn't finish. Run these commands:
+
+```bash
+cd ~/Konversion
+```
+
+```bash
+go build -o konversion .
+```
+
+```bash
+sudo cp konversion /usr/local/bin/konversion
+```
+
+Then try `konversion` again. Make sure you're typing it **all lowercase**.
+
+### "destination path already exists"
+
+You already have a ~/Konversion folder. Delete it and try again:
+
+```bash
+rm -rf ~/Konversion
+git clone https://github.com/Stvn444/Konversion.git ~/Konversion
+```
+
+### "go: command not found"
+
+Go isn't installed. Install it:
+
+```bash
+brew install go             # macOS
+sudo apt install golang     # Ubuntu/Debian
+```
+
+Or download from [go.dev/dl](https://go.dev/dl/)
+
 ### "yt-dlp is not installed"
 
 ```bash
-brew install yt-dlp        # macOS
-pip install yt-dlp          # any system with Python
-sudo apt install yt-dlp     # Ubuntu/Debian
+brew install yt-dlp         # macOS
+pip install yt-dlp           # any system with Python
+sudo apt install yt-dlp      # Ubuntu/Debian
 ```
 
 ### "ffmpeg is not installed"
 
 ```bash
-brew install ffmpeg         # macOS
-sudo apt install ffmpeg     # Ubuntu/Debian
+brew install ffmpeg          # macOS
+sudo apt install ffmpeg      # Ubuntu/Debian
 ```
 
 ### "Invalid YouTube URL format"
@@ -177,23 +267,21 @@ Make sure you're pasting the full URL. These formats work:
 - `https://www.youtube.com/embed/VIDEO_ID`
 - `https://www.youtube.com/playlist?list=PLAYLIST_ID`
 
-### "go: command not found"
-
-Install Go first:
-
-```bash
-brew install go             # macOS
-sudo apt install golang     # Ubuntu/Debian
-```
-
-Or download from [go.dev/dl](https://go.dev/dl/)
-
 ### How do I update Konversion?
 
 ```bash
 cd ~/Konversion
+```
+
+```bash
 git pull
+```
+
+```bash
 go build -o konversion .
+```
+
+```bash
 sudo cp konversion /usr/local/bin/konversion
 ```
 
