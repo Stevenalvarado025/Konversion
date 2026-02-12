@@ -1,6 +1,7 @@
 # Binary
 konversion
 konversion.exe
+dist/
 
 # OS files
 .DS_Store

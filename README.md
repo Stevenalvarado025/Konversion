@@ -26,131 +26,51 @@ Built for producers and artists who just want to rip audio from YouTube without 
 
 ---
 
-## Install (macOS)
+## Quick Install (macOS / Linux)
 
-Open **Terminal** (search "Terminal" in Spotlight) and follow these steps. **Run each command one at a time** — wait for each one to finish before pasting the next.
-
-### Step 1: Install Homebrew (if you don't have it)
+Open **Terminal** and paste this single command:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+curl -fsSL https://raw.githubusercontent.com/Stvn444/Konversion/main/install.sh | bash
 ```
 
-Follow the instructions on screen. When it's done, **close Terminal and reopen it**.
+This automatically downloads and installs Konversion for your system.
 
-### Step 2: Install Go, yt-dlp, and ffmpeg
+**You still need yt-dlp and ffmpeg.** The installer will tell you if they're missing. Install them:
+
+**macOS:**
 
 ```bash
-brew install go yt-dlp ffmpeg
+brew install yt-dlp ffmpeg
 ```
 
-Wait for it to finish. This might take a few minutes.
+> Don't have Homebrew? Install it first: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
-### Step 3: Download Konversion
-
-```bash
-git clone https://github.com/Stvn444/Konversion.git ~/Konversion
-```
-
-> **Already have a ~/Konversion folder?** Delete it first: `rm -rf ~/Konversion` then run the clone command again.
-
-### Step 4: Build it
+**Linux (Ubuntu/Debian):**
 
 ```bash
-cd ~/Konversion
-```
-
-```bash
-go build -o konversion .
-```
-
-### Step 5: Install it
-
-```bash
-sudo cp konversion /usr/local/bin/konversion
-```
-
-It will ask for your Mac password. Type it in and press Enter. You won't see the characters as you type — that's normal.
-
-### Step 6: Run it
-
-Open a **new Terminal window** and type:
-
-```bash
-konversion
-```
-
-> **IMPORTANT:** The command is all lowercase: `konversion` (not `Konversion`)
-
-You should see the Konversion banner and a prompt to paste a URL. You're good to go!
-
----
-
-## Install (Linux)
-
-Run each command one at a time:
-
-```bash
-sudo apt update
-```
-
-```bash
-sudo apt install golang ffmpeg
+sudo apt install ffmpeg
 ```
 
 ```bash
 pip install yt-dlp
 ```
 
-```bash
-git clone https://github.com/Stvn444/Konversion.git ~/Konversion
-```
-
-```bash
-cd ~/Konversion
-```
-
-```bash
-go build -o konversion .
-```
-
-```bash
-sudo cp konversion /usr/local/bin/konversion
-```
-
-Then run:
-
-```bash
-konversion
-```
+Then just type `konversion` to run it.
 
 ---
 
 ## Install (Windows)
 
-1. Install [Go](https://go.dev/dl/) — download the Windows installer and run it
-2. Install [Git](https://git-scm.com/downloads/win) — download and run the installer
+1. Download `konversion-windows-amd64.exe` from the [Releases page](https://github.com/Stvn444/Konversion/releases)
+2. Rename it to `konversion.exe` and put it somewhere in your PATH
 3. Install [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) — download "ffmpeg-release-essentials.zip", extract it, and add the `bin` folder to your PATH
 4. Install [yt-dlp](https://github.com/yt-dlp/yt-dlp/releases) — download `yt-dlp.exe` and put it in a folder that's in your PATH
 
-Then open Command Prompt or PowerShell and run each command one at a time:
+Then open Command Prompt or PowerShell and type:
 
 ```bash
-git clone https://github.com/Stvn444/Konversion.git %USERPROFILE%\Konversion
-```
-
-```bash
-cd %USERPROFILE%\Konversion
-```
-
-```bash
-go build -o konversion.exe .
-```
-
-Then to run it:
-
-```bash
-%USERPROFILE%\Konversion\konversion.exe
+konversion
 ```
 
 ---
@@ -191,41 +111,13 @@ Your **Downloads** folder. After every download it prints the full path so you k
 
 ### "command not found: konversion"
 
-This means the install didn't finish. Run these commands:
+Re-run the install script:
 
 ```bash
-cd ~/Konversion
+curl -fsSL https://raw.githubusercontent.com/Stvn444/Konversion/main/install.sh | bash
 ```
 
-```bash
-go build -o konversion .
-```
-
-```bash
-sudo cp konversion /usr/local/bin/konversion
-```
-
-Then try `konversion` again. Make sure you're typing it **all lowercase**.
-
-### "destination path already exists"
-
-You already have a ~/Konversion folder. Delete it and try again:
-
-```bash
-rm -rf ~/Konversion
-git clone https://github.com/Stvn444/Konversion.git ~/Konversion
-```
-
-### "go: command not found"
-
-Go isn't installed. Install it:
-
-```bash
-brew install go             # macOS
-sudo apt install golang     # Ubuntu/Debian
-```
-
-Or download from [go.dev/dl](https://go.dev/dl/)
+Make sure you're typing it **all lowercase**: `konversion` (not `Konversion`).
 
 ### "yt-dlp is not installed"
 
@@ -249,22 +141,13 @@ Make sure you're pasting the full URL. These formats work:
 - `https://www.youtube.com/watch?v=VIDEO_ID`
 - `https://youtu.be/VIDEO_ID`
 - `https://www.youtube.com/embed/VIDEO_ID`
+
 ### How do I update Konversion?
 
-```bash
-cd ~/Konversion
-```
+Just run the install script again:
 
 ```bash
-git pull
-```
-
-```bash
-go build -o konversion .
-```
-
-```bash
-sudo cp konversion /usr/local/bin/konversion
+curl -fsSL https://raw.githubusercontent.com/Stvn444/Konversion/main/install.sh | bash
 ```
 
 ---
