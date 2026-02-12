@@ -59,6 +59,9 @@ chmod +x "/tmp/${BINARY_NAME}"
 
 # Install binary
 info "Installing to ${INSTALL_DIR}..."
+if [ ! -d "$INSTALL_DIR" ]; then
+    sudo mkdir -p "$INSTALL_DIR"
+fi
 if [ -w "$INSTALL_DIR" ]; then
     mv "/tmp/${BINARY_NAME}" "${INSTALL_DIR}/${BINARY_NAME}"
 else
