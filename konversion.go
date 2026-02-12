@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"os"
 	"os/exec"
@@ -83,7 +84,9 @@ func DownloadAndConvert(url string, opts Options) error {
 	Verbose(opts.Verbose, "Running: yt-dlp %s", strings.Join(args, " "))
 
 	cmd := exec.Command("yt-dlp", args...)
-	cmd.Stderr = nil
+
+	var stderrBuf bytes.Buffer
+	cmd.Stderr = &stderrBuf
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -108,6 +111,10 @@ func DownloadAndConvert(url string, opts Options) error {
 
 	if err := cmd.Wait(); err != nil {
 		ClearLine()
+		errMsg := strings.TrimSpace(stderrBuf.String())
+		if errMsg != "" {
+			return fmt.Errorf("yt-dlp failed: %s", errMsg)
+		}
 		return fmt.Errorf("yt-dlp failed: %w", err)
 	}
 
