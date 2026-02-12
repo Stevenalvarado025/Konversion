@@ -50,7 +50,7 @@ This might take a minute. Wait for it to finish.
 ### Step 3: Download, build, and install Konversion
 
 ```bash
-git clone https://github.com/Stevenalvarado025/Konversion.git ~/Konversion
+git clone https://github.com/Stvn444/Konversion.git ~/Konversion
 cd ~/Konversion
 go build -o konversion .
 sudo cp konversion /usr/local/bin/konversion
@@ -81,7 +81,7 @@ pip install yt-dlp
 ### Then build Konversion
 
 ```bash
-git clone https://github.com/Stevenalvarado025/Konversion.git ~/Konversion
+git clone https://github.com/Stvn444/Konversion.git ~/Konversion
 cd ~/Konversion
 go build -o konversion .
 sudo cp ~/Konversion/konversion /usr/local/bin/konversion
@@ -97,7 +97,7 @@ sudo cp ~/Konversion/konversion /usr/local/bin/konversion
 4. Open Command Prompt or PowerShell:
 
 ```bash
-git clone https://github.com/Stevenalvarado025/Konversion.git %USERPROFILE%\Konversion
+git clone https://github.com/Stvn444/Konversion.git %USERPROFILE%\Konversion
 cd %USERPROFILE%\Konversion
 go build -o konversion.exe .
 ```
