@@ -39,10 +39,6 @@ func PrintBanner() {
 	fmt.Printf("  %sConvert any YouTube video to high quality MP3%s\n\n", Dim, Reset)
 }
 
-func PrintDivider() {
-	fmt.Printf("  %s──────────────────────────────────────────────%s\n", Dim, Reset)
-}
-
 func colorize(color, text string) string {
 	return color + text + Reset
 }
@@ -117,14 +113,3 @@ func PrintTrackInfo(info *VideoInfo) {
 	fmt.Println()
 }
 
-func PrintSearchResults(results []VideoInfo) {
-	fmt.Println()
-	for i, r := range results {
-		fmt.Printf("  %s%d.%s %s %s(%s — %s)%s\n",
-			BoldCyan, i+1, Reset,
-			r.Title,
-			Dim, r.Uploader, FormatDuration(r.Duration), Reset,
-		)
-	}
-	fmt.Println()
-}

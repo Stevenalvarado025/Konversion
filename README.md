@@ -21,7 +21,6 @@ Built for producers and artists who just want to rip audio from YouTube without 
 - Shows you the track title, channel, and duration before downloading
 - Progress bar so you can see the download happening
 - Automatically embeds metadata (title, artist, thumbnail) into the MP3
-- Supports full playlists — paste a playlist URL and it grabs every track
 - MP3s are saved to your Downloads folder
 - Shows you the exact file path and size when it's done
 
@@ -182,21 +181,6 @@ Enter YouTube URL (or 'quit' to exit):
 
 It loops — keep pasting URLs back to back. Type `quit` when you're done.
 
-### Download a Playlist
-
-Paste a playlist URL and it grabs every track:
-
-```
-Enter YouTube URL (or 'quit' to exit): https://www.youtube.com/playlist?list=PLxxxxxxx
-
-  Found 12 tracks in playlist
-
-  [1/12] Song One
-  [2/12] Song Two
-  ...
-All 12 tracks downloaded to: /Users/you/Downloads
-```
-
 ### Where Do My MP3s Go?
 
 Your **Downloads** folder. After every download it prints the full path so you know exactly where to find it.
@@ -265,8 +249,6 @@ Make sure you're pasting the full URL. These formats work:
 - `https://www.youtube.com/watch?v=VIDEO_ID`
 - `https://youtu.be/VIDEO_ID`
 - `https://www.youtube.com/embed/VIDEO_ID`
-- `https://www.youtube.com/playlist?list=PLAYLIST_ID`
-
 ### How do I update Konversion?
 
 ```bash

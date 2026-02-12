@@ -51,20 +51,13 @@ func main() {
 			fmt.Println("  - https://www.youtube.com/watch?v=VIDEO_ID")
 			fmt.Println("  - https://youtu.be/VIDEO_ID")
 			fmt.Println("  - https://www.youtube.com/embed/VIDEO_ID")
-			fmt.Println("  - https://www.youtube.com/playlist?list=PLAYLIST_ID")
 			fmt.Println()
 			continue
 		}
 
-		// Route to playlist or single download
-		if IsPlaylistURL(input) {
-			if err := HandlePlaylist(input, opts); err != nil {
-				fmt.Printf("Error: %v\n", err)
-			}
-		} else {
-			if err := DownloadAndConvert(input, opts); err != nil {
-				fmt.Printf("Error: %v\n", err)
-			}
+		// Download and convert
+		if err := DownloadAndConvert(input, opts); err != nil {
+			fmt.Printf("Error: %v\n", err)
 		}
 		fmt.Println()
 	}
